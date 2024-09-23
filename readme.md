@@ -4,6 +4,13 @@
 
 This is an interactive game designed to simulate a business negotiation in a beautiful chat app interface. The player is given a prompt (e.g., "Sell me this pen" or "Sell me your company"), and their goal is to convince the AI to "buy" the item or idea by making persuasive arguments. The game provides real-time feedback, using a large language model (LLM) to simulate the AI's responses and track progress based on sentiment analysis.
 
+## Pictures
+
+<div style="display: flex;">
+<img src="./demo1.png" alt="drawing" width="300"/>
+<img src="./demo2.png" alt="drawing" width="300"/>
+</div>
+
 ## How to Play
 
 1. **Game Start**: 
