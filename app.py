@@ -2,10 +2,18 @@ from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 from game_logic import initialize_game, progress_game
 from pymongo import MongoClient
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# MongoDB setup
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 client = MongoClient("mongodb://localhost:27017/")
 db = client['game_db']
 games_collection = db['games']

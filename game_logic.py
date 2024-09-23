@@ -3,14 +3,12 @@ import random
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from typing import Dict
 
-# Initialize NLTK's VADER sentiment analyzer
 import nltk
 nltk.download('vader_lexicon')
 sid = SentimentIntensityAnalyzer()
 
-OLLAMA_API_URL = "http://localhost:11434/api/v1/generate"  # Replace with your Ollama Tiny Dolphin API
+OLLAMA_API_URL = "http://localhost:11434/api/v1/generate"
 
-# Example prompts for the player to sell
 PROMPTS = [
     "Sell me a vacuum cleaner.",
     "Convince me to invest in your startup.",
@@ -37,15 +35,12 @@ def progress_game(game_data: Dict, player_message: str) -> Dict:
     """
     Progress the game by sending the player's message to the AI and analyzing its response.
     """
-    # Send player message to the AI with the chat history and current context
     ai_response = generate_ai_response(
         f"You are hesitant to buy. Respond to this attempt to sell: '{player_message}'. Context: {game_data['context']}."
     )
 
-    # Perform sentiment analysis on the AI's response
     sentiment_score = perform_sentiment_analysis(ai_response)
 
-    # Update progress based on sentiment score
     game_data["progress"] += sentiment_score
     game_data["chat_history"].append({"player": player_message, "ai": ai_response})
     game_data["ai_message"] = ai_response
@@ -72,7 +67,6 @@ def perform_sentiment_analysis(ai_response: str) -> int:
     Perform sentiment analysis on the AI's response and return a score from -10 to 10.
     """
     sentiment = sid.polarity_scores(ai_response)
-    compound_score = sentiment['compound']  # Compound score ranges from -1 to 1
+    compound_score = sentiment['compound']
 
-    # Convert the compound score to a range of -10 to 10
     return int(compound_score * 10)
